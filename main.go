@@ -162,7 +162,8 @@ func main() {
 	}
 
 	if _, err := os.Stat(DOWNLOAD_PATH); err != nil {
-		err := os.Mkdir(DOWNLOAD_PATH, 0755)
+
+		err := os.MkdirAll(DOWNLOAD_PATH, 0755)
 
 		check(err)
 	}
