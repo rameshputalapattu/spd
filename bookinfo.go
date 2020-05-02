@@ -1,6 +1,6 @@
 package main
 
-var booksInfo = []string{
+var BOOKS_INFO = []string{
 	"Fundamentals of Power Electronics_0~http://link.springer.com/openurl?genre=book&isbn=978-0-306-48048-5",
 	"Handbook of the Life Course_1~http://link.springer.com/openurl?genre=book&isbn=978-0-306-48247-2",
 	"All of Statistics_2~http://link.springer.com/openurl?genre=book&isbn=978-0-387-21736-9",

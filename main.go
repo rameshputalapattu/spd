@@ -8,12 +8,12 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 
 	"strings"
 	"sync"
 
 	"github.com/PuerkitoBio/goquery"
-	//"github.com/robertkrimen/otto"
 )
 
 type task interface {
@@ -65,7 +65,7 @@ func (book *springerEbook) process() {
 }
 
 func (book *springerEbook) store() {
-	storage_path := "books/"
+	storage_path := DOWNLOAD_PATH
 
 	cli := &http.Client{}
 	res, err := cli.Get(book.book_pdf_url)
@@ -74,7 +74,8 @@ func (book *springerEbook) store() {
 		return
 	}
 
-	f, err := os.Create(storage_path + book.book_name + ".pdf")
+	f, err := os.Create(filepath.Join(storage_path, book.book_name+".pdf"))
+
 	if err != nil {
 
 		book.err = err
@@ -152,7 +153,19 @@ func run(f factory) {
 
 }
 
+var DOWNLOAD_PATH = `~/Downloads/Springer_Quarantine_Ebooks`
+
 func main() {
+
+	if len(os.Args) > 1 {
+		DOWNLOAD_PATH = os.Args[1]
+	}
+
+	if _, err := os.Stat(DOWNLOAD_PATH); err != nil {
+		err := os.Mkdir(DOWNLOAD_PATH, 0755)
+
+		check(err)
+	}
 
 	run(&bookfactory{})
 
@@ -210,6 +223,6 @@ func GetBookStoreUrl(url string) (string, string, error) {
 }
 
 func GetBooksInfo() []string {
-	return booksInfo
+	return BOOKS_INFO
 
 }
