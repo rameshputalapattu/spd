@@ -153,7 +153,7 @@ func run(f factory) {
 
 }
 
-var DOWNLOAD_PATH = filepath.Join(os.Getenv("HOME"), `Downloads/Springer_Quarantine_Ebooks`)
+var DOWNLOAD_PATH = filepath.Join(os.Getenv("HOME"), `Downloads/Springer_Lockdown_Ebooks`)
 
 func main() {
 
